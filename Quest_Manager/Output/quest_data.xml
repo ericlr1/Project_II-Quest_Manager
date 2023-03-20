@@ -1,0 +1,33 @@
+<!-- Quest Data -->
+<quests>
+  <quest 
+	id="1"
+	title="Tutorial Mission" 
+	type="4" 
+	trigger="1" 
+	description="Collect 3 coins, 5 emeralds and 1 diamond" 
+	reward="1"
+	requisites="0"> 
+  </quest>
+
+  <quest 
+	id="2"
+	title="Main Mission" 
+	type="4"  
+	trigger="1" 
+	description="Collect 3 coins, 5 emeralds and 1 diamond" 
+	reward="2"
+	requisites="1">  
+  </quest>
+  
+  <quest 
+	id="3"
+	title="Final Mission" 
+	type="4" 
+	trigger="1" 
+	description="Collect 3 coins, 5 emeralds and 1 diamond" 
+	reward="3" 
+	requisites="2"> 
+  </quest>
+
+</quests>

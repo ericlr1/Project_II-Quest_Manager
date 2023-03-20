@@ -51,6 +51,12 @@ bool Scene::Start()
 {
 	//img = app->tex->Load("Assets/Textures/test.png");
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
+
+	//TODO - UI
+	diamond = app->tex->Load("Assets/Textures/diamond.png");
+	emerald = app->tex->Load("Assets/Textures/emerald.png");
+	gold = app->tex->Load("Assets/Textures/goldCoin.png");
+	completed_mision = app->tex->Load("Assets/Textures/trofeo.png");
 	
 	// L03: DONE: Load map
 	bool retLoad = app->map->Load();
@@ -128,12 +134,63 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= ceil(speed);
 
+	//TODO - Add inputs (triggers)
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		trigger_1++;
+		LOG("trigger_1: %d", trigger_1);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		trigger_2++;
+		LOG("trigger_2: %d", trigger_2);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		trigger_3++;
+		LOG("trigger_3: %d", trigger_3);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+		r++;
+
+	OrderEvent();
+	CheckEvent();
+
+	//------
+
 	// Draw map
 	app->map->Draw();
 
 	//L15: Draw GUI
 	app->guiManager->Draw();
 
+
+	//TODO - UI
+	for (int i = 0; i < trigger_1; i++)
+	{
+		app->render->DrawTexture(gold, 10 + (i * 32) + 2, 10);
+	}
+	
+	for (int i = 0; i < trigger_2; i++)
+	{
+		app->render->DrawTexture(emerald, 10 + (i * 32) + 2, 50);
+	}
+
+	for (int i = 0; i < trigger_3; i++)
+	{
+		app->render->DrawTexture(diamond, 10 + (i * 32) + 2, 80);
+	}
+
+	for (int i = 0; i < r; i++)
+	{
+		app->render->DrawTexture(completed_mision, 1210, 60 + (i * 64) + 2);
+	}
+	//-------------
+	
 	// L08: DONE 3: Test World to map method
 
 	/*
@@ -230,113 +287,125 @@ bool Scene::CleanUp()
 //therefore we are gonna create a simple function that checks the events that we are interested in. 
 //The skeleton is already implemented, therefore you will only need to fill the loop that will iterate the active_quests list and checks those conditions
 
-//void Scene::CheckEvent()
-//{
-//	for (std::list <Quest*>::iterator it = App->quest_manager->active_quests.begin(); it != App->quest_manager->active_quests.end(); it++)
-//	{
-//		int quest_id = (*it)->id;
-//
-//		switch (quest_id)
-//		{
-//		case 1:
-//			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && r > -1)
-//			{
-//				(*it)->completed = true;
-//				r++;
-//				App->fruit->Restart();
-//				App->quest_manager->finished_quests.push_back((*it));
-//				App->quest_manager->active_quests.erase(it);
-//			}
-//			break;
-//		case 2:
-//			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && r > 0)
-//			{
-//				(*it)->completed = true;
-//				r++;
-//				App->fruit->Restart();
-//				App->quest_manager->finished_quests.push_back((*it));
-//				App->quest_manager->active_quests.erase(it);
-//			}
-//			break;
-//		case 3:
-//			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && r > 2)
-//			{
-//				(*it)->completed = true;
-//				r++;
-//				App->fruit->Restart();
-//				App->quest_manager->finished_quests.push_back((*it));
-//				App->quest_manager->active_quests.erase(it);
-//			}
-//			break;
-//		case 4:
-//			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && score == 4)
-//			{
-//				(*it)->completed = true;
-//				r++;
-//				App->fruit->Restart();
-//				App->quest_manager->finished_quests.push_back((*it));
-//				App->quest_manager->active_quests.erase(it);
-//			}
-//			break;
-//		case 5:
-//			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && r > 3)
-//			{
-//				(*it)->completed = true;
-//				App->fruit->Restart();
-//				App->quest_manager->finished_quests.push_back((*it));
-//				App->quest_manager->active_quests.erase(it);
-//			}
-//			break;
-//		default:
-//			break;
-//		}
-//
-//		//TODO 6: We are almost done, we are currently correctly checking the active_quests list but we aren't doing anything with a quest
-//		// once it's completed, therefore we need to transfer the complete quests to the finished_quests list 
-//	}
-//
-//	//TODO 7: As the final TODO, just take a look at how we are only drawing an achievement (quest completed) once they are in the finished_quests list
-//	// I'd also like you to take a look at how we make the 4th achievement a different quest by forcing the player to complete the side-quests in a particular order
-//	for (std::list <Quest*>::iterator it = App->quest_manager->finished_quests.begin(); it != App->quest_manager->finished_quests.end(); it++)
-//	{
-//		int quest_id = (*it)->id;
-//
-//		switch (quest_id)
-//		{
-//		case 1:
-//			//Draw something
-//			break;
-//		case 2:
-//			//Draw something
-//			break;
-//		case 3:
-//			//Draw something
-//			break;
-//		case 4:
-//			//Draw something
-//			break;
-//		case 5:
-//			//Draw something
-//			break;
-//		default:
-//			break;
-//		}
-//	}
-//
-//}
+void Scene::ResetTriggers()
+{
+	trigger_1 = 0;
+	trigger_2 = 0;
+	trigger_3 = 0;
+}
 
-//void Scene::OrderEvent()
-//{
-//	if (cherry == true && App->fruit->b_points == 0 && App->fruit->o_points == 0 && App->fruit->w_points == 0 && App->fruit->m_points == 0) {
-//		score = 1;
-//	}
-//	if (cherry == true && banana == true && App->fruit->o_points == 0 && App->fruit->w_points == 0 && App->fruit->m_points == 0) {
-//		score = 2;
-//	}
-//	if (cherry == true && banana == true && orange == true && App->fruit->w_points == 0 && App->fruit->m_points == 0) {
-//		score = 3;
-//	}
-//	if (cherry == true && banana == true && orange == true && watermelon == true && App->fruit->m_points == 0) {
-//		score = 4;
-//	}
-//}
+void Scene::CheckEvent()
+{
+	//Check the variables
+	if (trigger_1 == 3)
+	{
+		first_mision = true;
+	}
+	else
+	{
+		first_mision = false;
+	}
+
+	if (trigger_2 == 5)
+	{
+		second_mision = true;
+	}
+	else
+	{
+		second_mision = false;
+	}
+
+	if (trigger_3 == 1)
+	{
+		third_mision = true;
+	}
+	else
+	{
+		third_mision = false;
+	}
+
+	for (std::list <Quest*>::iterator it = app->quest_manager->active_quests.begin(); it != app->quest_manager->active_quests.end(); it++)
+	{
+		int quest_id = (*it)->id;
+
+		switch (quest_id)
+		{
+		case 1:
+			if (first_mision == true && second_mision == true && third_mision == true && r > -1)
+			{
+				(*it)->completed = true;
+				r++;
+				ResetTriggers();
+				app->quest_manager->finished_quests.push_back((*it));
+				app->quest_manager->active_quests.erase(it);
+			}
+			break;
+		case 2:
+			if (first_mision == true && second_mision == true && third_mision == true && r > 0)
+			{
+				(*it)->completed = true;
+				r++;
+				ResetTriggers();
+				app->quest_manager->finished_quests.push_back((*it));
+				app->quest_manager->active_quests.erase(it);
+			}
+			break;
+		case 3:
+			if (first_mision == true && second_mision == true && third_mision == true && r > 2)
+			{
+				(*it)->completed = true;
+				r++;
+				ResetTriggers();
+				app->quest_manager->finished_quests.push_back((*it));
+				app->quest_manager->active_quests.erase(it);
+			}
+			break;
+		default:
+			break;
+		}
+
+		//TODO 6: We are almost done, we are currently correctly checking the active_quests list but we aren't doing anything with a quest
+		// once it's completed, therefore we need to transfer the complete quests to the finished_quests list 
+	}
+
+	//TODO 7: As the final TODO, just take a look at how we are only drawing an achievement (quest completed) once they are in the finished_quests list
+	for (std::list <Quest*>::iterator it = app->quest_manager->finished_quests.begin(); it != app->quest_manager->finished_quests.end(); it++)
+	{
+		int quest_id = (*it)->id;
+
+		switch (quest_id)
+		{
+		case 1:
+			//Draw something
+			break;
+		case 2:
+			//Draw something
+			break;
+		case 3:
+			//Draw something
+			break;
+		case 4:
+			//Draw something
+			break;
+		case 5:
+			//Draw something
+			break;
+		default:
+			break;
+		}
+	}
+
+}
+
+void Scene::OrderEvent()
+{
+	if (first_mision == true) {
+		score = 1;
+	}
+	if (first_mision == true && second_mision == true) {
+		score = 2;
+	}
+	if (first_mision == true && second_mision == true && third_mision == true) {
+		score = 3;
+	}
+}

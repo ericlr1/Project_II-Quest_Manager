@@ -41,6 +41,7 @@ public:
 	//TODO
 	void CheckEvent();
 	void OrderEvent();
+	void ResetTriggers();
 
 public:
 
@@ -51,6 +52,7 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* mouseTileTex = nullptr;
 	SDL_Texture* originTex = nullptr;
+	SDL_Texture* completed_mision = nullptr;
 
 	// L12: Debug pathfing
 	iPoint origin;
@@ -61,14 +63,22 @@ private:
 	GuiButton* button2;
 
 	//TODO (Hacia abajo)
-	int r = 0;
-	int score = 0;
+	SDL_Texture* diamond = nullptr;
+	SDL_Texture* emerald = nullptr;
+	SDL_Texture* gold = nullptr;
 
-	bool cherry = false;
-	bool banana = false;
-	bool orange = false;
-	bool watermelon = false;
-	bool mango = false;
+	int r = 0; //Times you completed any mision
+	int score = 0; //Order the misions variable
+
+	//Triggers
+	int trigger_1 = 0;
+	int trigger_2 = 0;
+	int trigger_3 = 0;
+
+	//Misions completed
+	bool first_mision = false;
+	bool second_mision = false;
+	bool third_mision = false;
 };
 
 #endif // __SCENE_H__

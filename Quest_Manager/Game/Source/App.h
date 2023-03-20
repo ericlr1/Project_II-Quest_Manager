@@ -98,7 +98,7 @@ public:
 	Physics* physics;
 	PathFinding* pathfinding;
 	GuiManager* guiManager;
-	QuestManager* questManager;		//TODO
+	QuestManager* quest_manager;		//TODO
 
 private:
 

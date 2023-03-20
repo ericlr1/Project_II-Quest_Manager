@@ -37,7 +37,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager();
 	map = new Map();
 	guiManager = new GuiManager();
-	questManager = new QuestManager();		//TODO
+	quest_manager = new QuestManager();		//TODO
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -52,7 +52,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(map);
 	AddModule(guiManager);
-	AddModule(questManager);	//TODO
+	AddModule(quest_manager);	//TODO
 
 	// Render last to swap buffer
 	AddModule(render);
