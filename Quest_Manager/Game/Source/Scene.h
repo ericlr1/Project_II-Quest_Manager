@@ -38,6 +38,10 @@ public:
 	// Define multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	//TODO
+	void CheckEvent();
+	void OrderEvent();
+
 public:
 
 	//L02: DONE 3: Declare a Player attribute 
@@ -55,6 +59,16 @@ private:
 	// L15: DONE 2: Declare a GUI Button and create it using the GuiManager
 	GuiButton* button1; 
 	GuiButton* button2;
+
+	//TODO (Hacia abajo)
+	int r = 0;
+	int score = 0;
+
+	bool cherry = false;
+	bool banana = false;
+	bool orange = false;
+	bool watermelon = false;
+	bool mango = false;
 };
 
 #endif // __SCENE_H__

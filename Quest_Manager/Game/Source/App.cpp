@@ -10,7 +10,7 @@
 #include "Physics.h"
 #include "Pathfinding.h"
 #include "GuiManager.h"
-#include "QuestManager.h"
+#include "QuestManager.h"	//TODO
 
 #include "Defs.h"
 #include "Log.h"
@@ -18,9 +18,7 @@
 #include <iostream>
 #include <sstream>
 
-// L16: TODO 3: Add OPTICK_EVENT() calls to all Update methods
-// Alternatively you can use OPTICK_CATEGORY()
-// Constructor
+
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {
 	// L13: DONE 3: Measure the amount of ms that takes to execute the App constructor and LOG the result
@@ -39,7 +37,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager();
 	map = new Map();
 	guiManager = new GuiManager();
-	questManager = new QuestManager();
+	questManager = new QuestManager();		//TODO
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -54,7 +52,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(map);
 	AddModule(guiManager);
-	AddModule(questManager);
+	AddModule(questManager);	//TODO
 
 	// Render last to swap buffer
 	AddModule(render);

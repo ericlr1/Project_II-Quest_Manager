@@ -24,7 +24,7 @@ class Map;
 class Physics;
 class PathFinding;
 class GuiManager;
-class QuestManager;
+class QuestManager;			//TODO
 
 class App
 {
@@ -98,7 +98,7 @@ public:
 	Physics* physics;
 	PathFinding* pathfinding;
 	GuiManager* guiManager;
-	QuestManager* questManager;
+	QuestManager* questManager;		//TODO
 
 private:
 

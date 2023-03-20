@@ -9,6 +9,7 @@
 #include "Map.h"
 #include "PathFinding.h"
 #include "GuiManager.h"
+#include "QuestManager.h"		//TODO
 
 #include "Defs.h"
 #include "Log.h"
@@ -221,4 +222,121 @@ bool Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+
+//TODO (Hacia abajo)
+
+//TODO 5: Now that we have our base working, it's time to implement it with the context, 
+//therefore we are gonna create a simple function that checks the events that we are interested in. 
+//The skeleton is already implemented, therefore you will only need to fill the loop that will iterate the active_quests list and checks those conditions
+
+void Scene::CheckEvent()
+{
+	for (std::list <Quest*>::iterator it = App->quest_manager->active_quests.begin(); it != App->quest_manager->active_quests.end(); it++)
+	{
+		int quest_id = (*it)->id;
+
+		switch (quest_id)
+		{
+		case 1:
+			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && r > -1)
+			{
+				(*it)->completed = true;
+				r++;
+				App->fruit->Restart();
+				App->quest_manager->finished_quests.push_back((*it));
+				App->quest_manager->active_quests.erase(it);
+			}
+			break;
+		case 2:
+			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && r > 0)
+			{
+				(*it)->completed = true;
+				r++;
+				App->fruit->Restart();
+				App->quest_manager->finished_quests.push_back((*it));
+				App->quest_manager->active_quests.erase(it);
+			}
+			break;
+		case 3:
+			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && r > 2)
+			{
+				(*it)->completed = true;
+				r++;
+				App->fruit->Restart();
+				App->quest_manager->finished_quests.push_back((*it));
+				App->quest_manager->active_quests.erase(it);
+			}
+			break;
+		case 4:
+			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && score == 4)
+			{
+				(*it)->completed = true;
+				r++;
+				App->fruit->Restart();
+				App->quest_manager->finished_quests.push_back((*it));
+				App->quest_manager->active_quests.erase(it);
+			}
+			break;
+		case 5:
+			if (cherry == true && banana == true && orange == true && watermelon == true && mango == true && r > 3)
+			{
+				(*it)->completed = true;
+				App->fruit->Restart();
+				App->quest_manager->finished_quests.push_back((*it));
+				App->quest_manager->active_quests.erase(it);
+			}
+			break;
+		default:
+			break;
+		}
+
+		//TODO 6: We are almost done, we are currently correctly checking the active_quests list but we aren't doing anything with a quest
+		// once it's completed, therefore we need to transfer the complete quests to the finished_quests list 
+	}
+
+	//TODO 7: As the final TODO, just take a look at how we are only drawing an achievement (quest completed) once they are in the finished_quests list
+	// I'd also like you to take a look at how we make the 4th achievement a different quest by forcing the player to complete the side-quests in a particular order
+	for (std::list <Quest*>::iterator it = App->quest_manager->finished_quests.begin(); it != App->quest_manager->finished_quests.end(); it++)
+	{
+		int quest_id = (*it)->id;
+
+		switch (quest_id)
+		{
+		case 1:
+			//Draw something
+			break;
+		case 2:
+			//Draw something
+			break;
+		case 3:
+			//Draw something
+			break;
+		case 4:
+			//Draw something
+			break;
+		case 5:
+			//Draw something
+			break;
+		default:
+			break;
+		}
+	}
+
+}
+
+void Scene::OrderEvent()
+{
+	if (cherry == true && App->fruit->b_points == 0 && App->fruit->o_points == 0 && App->fruit->w_points == 0 && App->fruit->m_points == 0) {
+		score = 1;
+	}
+	if (cherry == true && banana == true && App->fruit->o_points == 0 && App->fruit->w_points == 0 && App->fruit->m_points == 0) {
+		score = 2;
+	}
+	if (cherry == true && banana == true && orange == true && App->fruit->w_points == 0 && App->fruit->m_points == 0) {
+		score = 3;
+	}
+	if (cherry == true && banana == true && orange == true && watermelon == true && App->fruit->m_points == 0) {
+		score = 4;
+	}
 }

@@ -34,11 +34,6 @@ bool QuestManager::Awake(pugi::xml_node& config)
 {
 	LOG("STARTING QUEST_MANAGER");
 
-
-	//TODO 3: Now that we have the XML loaded, we'll begin loading all of the info into our Quest Manager. 
-	//Remember to use the LoadQuest function we just created and to use the proper syntax. 
-	//We will code a loop that creates a new_quest and loads all of its info for every quest on the XML
-
 	pugi::xml_node quest_node;
 	quest_node = LoadQuests(quest_data);  //Loads the xml file that you pass in the "xmlfile" and returns a node
 
@@ -60,10 +55,7 @@ bool QuestManager::Awake(pugi::xml_node& config)
 		new_quest->reward = quest_node.attribute("reward").as_int();
 		new_quest->requisites = quest_node.attribute("requisites").as_int();
 
-		//TODO 4: Right now, we are creating the Quests but we are not storing them properly, 
-		//therefore after every loop we will push them into the loaded_quests list, 
-		//however if a quest's trigger is equal to 1 (meaning that is always active) we will directly put those into the active_quests list
-
+	
 		if (new_quest->trigger == 1)
 		{
 			active_quests.push_back(new_quest);
