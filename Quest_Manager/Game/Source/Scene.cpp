@@ -289,9 +289,9 @@ bool Scene::CleanUp()
 
 void Scene::ResetTriggers()
 {
-	trigger_1 = 0;
-	trigger_2 = 0;
-	trigger_3 = 0;
+	this->trigger_1 = 0;
+	this->trigger_2 = 0;
+	this->trigger_3 = 0;
 }
 
 void Scene::CheckEvent()
