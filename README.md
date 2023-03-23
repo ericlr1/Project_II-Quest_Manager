@@ -18,5 +18,6 @@ The Quest Manager Template was created by Eric Luque Romero as part of the Proje
 
 ## References
 https://www.youtube.com/playlist?list=PL4G2bSPE_8umJfOuXxut28OQyIliW2Pfp
+
 https://www.gamedev.net/forums/topic/649132-quest-system/
 
