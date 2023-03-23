@@ -3,7 +3,7 @@
   <quest 
 	id="1"
 	title="Tutorial Mission" 
-	type="4" 
+	type="1" 
 	trigger="1" 
 	description="Collect 3 coins, 5 emeralds and 1 diamond" 
 	reward="1"
@@ -13,7 +13,7 @@
   <quest 
 	id="2"
 	title="Main Mission" 
-	type="4"  
+	type="1"  
 	trigger="1" 
 	description="Collect 3 coins, 5 emeralds and 1 diamond" 
 	reward="2"
@@ -23,7 +23,7 @@
   <quest 
 	id="3"
 	title="Final Mission" 
-	type="4" 
+	type="1" 
 	trigger="1" 
 	description="Collect 3 coins, 5 emeralds and 1 diamond" 
 	reward="3" 

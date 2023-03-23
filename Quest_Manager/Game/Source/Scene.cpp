@@ -57,6 +57,7 @@ bool Scene::Start()
 	emerald = app->tex->Load("Assets/Textures/emerald.png");
 	gold = app->tex->Load("Assets/Textures/goldCoin.png");
 	completed_mision = app->tex->Load("Assets/Textures/trofeo.png");
+	//--------------
 	
 	// L03: DONE: Load map
 	bool retLoad = app->map->Load();
@@ -154,11 +155,15 @@ bool Scene::Update(float dt)
 		LOG("trigger_3: %d", trigger_3);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	/*if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
 		r++;
+		LOG("R: %d", r);
+	}*/
 
-	OrderEvent();
+
 	CheckEvent();
+	
 
 	//------
 
@@ -185,9 +190,19 @@ bool Scene::Update(float dt)
 		app->render->DrawTexture(diamond, 10 + (i * 32) + 2, 80);
 	}
 
-	for (int i = 0; i < r; i++)
+	if (draw_M1)
 	{
-		app->render->DrawTexture(completed_mision, 1210, 60 + (i * 64) + 2);
+		app->render->DrawTexture(completed_mision, 1210, 60 + (0 * 64) + 2);
+	}
+
+	if (draw_M2)
+	{
+		app->render->DrawTexture(completed_mision, 1210, 60 + (1 * 64) + 2);
+	}
+
+	if (draw_M3)
+	{
+		app->render->DrawTexture(completed_mision, 1210, 60 + (2 * 64) + 2);
 	}
 	//-------------
 	
@@ -287,12 +302,6 @@ bool Scene::CleanUp()
 //therefore we are gonna create a simple function that checks the events that we are interested in. 
 //The skeleton is already implemented, therefore you will only need to fill the loop that will iterate the active_quests list and checks those conditions
 
-void Scene::ResetTriggers()
-{
-	this->trigger_1 = 0;
-	this->trigger_2 = 0;
-	this->trigger_3 = 0;
-}
 
 void Scene::CheckEvent()
 {
@@ -301,28 +310,17 @@ void Scene::CheckEvent()
 	{
 		first_mision = true;
 	}
-	else
-	{
-		first_mision = false;
-	}
 
 	if (trigger_2 == 5)
 	{
 		second_mision = true;
-	}
-	else
-	{
-		second_mision = false;
 	}
 
 	if (trigger_3 == 1)
 	{
 		third_mision = true;
 	}
-	else
-	{
-		third_mision = false;
-	}
+	//----------------------
 
 	for (std::list <Quest*>::iterator it = app->quest_manager->active_quests.begin(); it != app->quest_manager->active_quests.end(); it++)
 	{
@@ -331,31 +329,55 @@ void Scene::CheckEvent()
 		switch (quest_id)
 		{
 		case 1:
-			if (first_mision == true && second_mision == true && third_mision == true && r > -1)
+			if (first_mision == true && second_mision == true && third_mision == true && r >= 0)
 			{
 				(*it)->completed = true;
-				r++;
-				ResetTriggers();
+				r=1;
+				LOG("R: %d", r);
+				//Reset variables
+				this->trigger_1 = 0;
+				this->trigger_2 = 0;
+				this->trigger_3 = 0;
+				first_mision = false;
+				second_mision = false;
+				third_mision = false;
+				//------------
 				app->quest_manager->finished_quests.push_back((*it));
 				app->quest_manager->active_quests.erase(it);
 			}
 			break;
 		case 2:
-			if (first_mision == true && second_mision == true && third_mision == true && r > 0)
+			if (first_mision == true && second_mision == true && third_mision == true && r >= 1)
 			{
 				(*it)->completed = true;
-				r++;
-				ResetTriggers();
+				r=2;
+				LOG("R: %d", r);
+				//Reset variables
+				this->trigger_1 = 0;
+				this->trigger_2 = 0;
+				this->trigger_3 = 0;
+				first_mision = false;
+				second_mision = false;
+				third_mision = false;
+				//------------
 				app->quest_manager->finished_quests.push_back((*it));
 				app->quest_manager->active_quests.erase(it);
 			}
 			break;
 		case 3:
-			if (first_mision == true && second_mision == true && third_mision == true && r > 2)
+			if (first_mision == true && second_mision == true && third_mision == true && r >= 2)
 			{
 				(*it)->completed = true;
-				r++;
-				ResetTriggers();
+				r=3;
+				LOG("R: %d", r);
+				//Reset variables
+				this->trigger_1 = 0;
+				this->trigger_2 = 0;
+				this->trigger_3 = 0;
+				first_mision = false;
+				second_mision = false;
+				third_mision = false;
+				//------------
 				app->quest_manager->finished_quests.push_back((*it));
 				app->quest_manager->active_quests.erase(it);
 			}
@@ -377,35 +399,30 @@ void Scene::CheckEvent()
 		{
 		case 1:
 			//Draw something
+			draw_M1 = true;
+			LOG("Draw M1");
 			break;
 		case 2:
 			//Draw something
+			draw_M2 = true;
+			LOG("Draw M2");
 			break;
 		case 3:
 			//Draw something
+			draw_M3 = true;
+			LOG("Draw M3");
 			break;
 		case 4:
 			//Draw something
+			
 			break;
 		case 5:
 			//Draw something
+			
 			break;
 		default:
 			break;
 		}
 	}
 
-}
-
-void Scene::OrderEvent()
-{
-	if (first_mision == true) {
-		score = 1;
-	}
-	if (first_mision == true && second_mision == true) {
-		score = 2;
-	}
-	if (first_mision == true && second_mision == true && third_mision == true) {
-		score = 3;
-	}
 }

@@ -42,6 +42,7 @@ bool QuestManager::Awake(pugi::xml_node& config)
 		LOG("Could not load quests_file.xml");
 	}
 
+	//Iterator creating the quests
 	for (quest_node = quest_node.child("quest"); quest_node; quest_node = quest_node.next_sibling("quest"))
 	{
 
