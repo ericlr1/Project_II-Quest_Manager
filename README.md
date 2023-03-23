@@ -14,4 +14,4 @@ The Quest Manager Template is designed to be customizable to fit a variety of di
 The Quest Manager Template is released under the MIT License.
 
 ## Acknowledgements
-The Quest Manager Template was created by Eric Luque Romero as part of the Proyecto II course at UPC - CITM. Special thanks to Pedro Omedas for their guidance and support during the project.
+The Quest Manager Template was created by Eric Luque Romero as part of the Project II course at UPC - CITM. Special thanks to Pedro Omedas for their guidance and support during the project.
