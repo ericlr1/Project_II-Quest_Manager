@@ -16,7 +16,7 @@ The Quest Manager Template is released under the MIT License.
 ## Acknowledgements
 The Quest Manager Template was created by Eric Luque Romero as part of the Project II course at UPC - CITM. Special thanks to Pedro Omedas for their guidance and support during the project.
 
-##References
+## References
 https://www.youtube.com/playlist?list=PL4G2bSPE_8umJfOuXxut28OQyIliW2Pfp
 https://www.gamedev.net/forums/topic/649132-quest-system/
 
