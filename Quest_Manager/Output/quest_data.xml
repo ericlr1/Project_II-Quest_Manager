@@ -30,4 +30,14 @@
 	requisites="2"> 
   </quest>
 
+  <!-- TODO 1: Create the XML Quest -->
+  <quest
+	id=""
+	title=""
+	type=""
+	trigger=""
+	description=""
+	reward=""
+	requisites="">
+  </quest>
 </quests>

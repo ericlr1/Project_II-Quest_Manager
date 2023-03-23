@@ -155,16 +155,7 @@ bool Scene::Update(float dt)
 		LOG("trigger_3: %d", trigger_3);
 	}
 
-	/*if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-	{
-		r++;
-		LOG("R: %d", r);
-	}*/
-
-
 	CheckEvent();
-	
-
 	//------
 
 	// Draw map
@@ -298,11 +289,7 @@ bool Scene::CleanUp()
 
 //TODO (Hacia abajo)
 
-//TODO 5: Now that we have our base working, it's time to implement it with the context, 
-//therefore we are gonna create a simple function that checks the events that we are interested in. 
-//The skeleton is already implemented, therefore you will only need to fill the loop that will iterate the active_quests list and checks those conditions
-
-
+//TODO 3: Add the quest to CheckEvent() 
 void Scene::CheckEvent()
 {
 	//Check the variables
@@ -385,12 +372,8 @@ void Scene::CheckEvent()
 		default:
 			break;
 		}
-
-		//TODO 6: We are almost done, we are currently correctly checking the active_quests list but we aren't doing anything with a quest
-		// once it's completed, therefore we need to transfer the complete quests to the finished_quests list 
 	}
 
-	//TODO 7: As the final TODO, just take a look at how we are only drawing an achievement (quest completed) once they are in the finished_quests list
 	for (std::list <Quest*>::iterator it = app->quest_manager->finished_quests.begin(); it != app->quest_manager->finished_quests.end(); it++)
 	{
 		int quest_id = (*it)->id;

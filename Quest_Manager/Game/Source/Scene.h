@@ -74,6 +74,7 @@ private:
 	int trigger_1 = 0;
 	int trigger_2 = 0;
 	int trigger_3 = 0;
+	//TODO 2: Create the variables to detect the trigger of the quest
 
 	//Misions completed
 	bool first_mision = false;
